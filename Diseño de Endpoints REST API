@@ -1,0 +1,5 @@
+Diseño de Endpoints REST API
+Descripción General
+
+Documentación de los endpoints REST para el sistema de gestión de salud. 
+Esta API sigue los principios RESTful y utiliza JSON como formato de intercambio de datos.
