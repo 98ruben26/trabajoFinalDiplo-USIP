@@ -52,20 +52,19 @@ Estados Soportados:
     EXPIRED/VOID: Sin validez.
 
 4. Gestión de Errores y Seguridad
+       Encabezados Requeridos (Headers):
+            Authorization: Bearer <JWT_TOKEN>
+            X-API-Key: <CLIENT_ID>
+            Content-Type: application/json
    
-    Encabezados Requeridos (Headers):
-        Authorization: Bearer <JWT_TOKEN>
-        X-API-Key: <CLIENT_ID>
-        Content-Type: application/json
-   
-Respuestas de Error Estándar:
-    Código	Significado	Motivo Típico
-        400	Bad Request	El JSON enviado es inválido o faltan campos obligatorios.
-        401	Unauthorized	Token expirado o inválido.
-        403	Forbidden	El usuario no tiene permisos sobre este contrato específico.
-        422	Unprocessable Entity	Error de lógica de negocio (ej. intentar editar un contrato ya firmado).
+       Respuestas de Error Estándar:
+            Código	            Significado	                Motivo Típico
+            400	            Bad Request	El JSON         enviado es inválido o faltan campos obligatorios.
+            401	            Unauthorized	            Token expirado o inválido.
+            403	            Forbidden	                El usuario no tiene permisos sobre este contrato específico.
+            422	            Unprocessable Entity	    Error de lógica de negocio .
 
-5. Webhooks y Eventos Asíncronos
+6. Webhooks y Eventos Asíncronos
 
 Dado que la firma de un contrato es un proceso humano lento, el sistema debe ser Event-Driven.
 
