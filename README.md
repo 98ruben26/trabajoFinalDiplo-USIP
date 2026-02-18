@@ -36,7 +36,7 @@ Auth	POST	/api/v1/auth/login	Autenticación de usuarios.	✅ Finalizado
 Contratos	GET	/api/v1/contracts	Listado de contratos activos.	⏳ En desarrollo
 Contratos	POST	/api/v1/contracts	Creación de nuevo contrato.	🛠️ Pendiente
 
-Ver: REST-API.md
+Ver: Diseño de Endpoints REST API.md
 
 📐 Diseño del Sistema
 Para garantizar la escalabilidad, se han definido los siguientes artefactos:
