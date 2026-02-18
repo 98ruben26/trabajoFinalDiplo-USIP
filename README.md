@@ -16,13 +16,13 @@ El objetivo es centralizar la "fuente de verdad" del proyecto, asegurando trazab
 La documentación se organiza de la siguiente manera para facilitar la auditoría del avance:
 Plaintext
 
-├── 📂 docs
-│   ├── 📂 architecture       # Diagramas C4, Flujos de Secuencia y ERD.
-│   ├── 📂 api-contracts      # Archivos YAML/JSON (OpenAPI Spec).
-│   ├── 📂 adr                # Architectural Decision Records (Decisiones clave).
-│   └── 📂 business-rules     # Lógica de negocio y validación de contratos.
-├── 📂 resources              # Assets, imágenes y prototipos de UI.
-└── README.md                 # Guía principal (este archivo).
+    ├── 📂 docs
+    │   ├── 📂 architecture       # Diagramas C4, Flujos de Secuencia y ERD.
+    │   ├── 📂 api-contracts      # Archivos YAML/JSON (OpenAPI Spec).
+    │   ├── 📂 adr                # Architectural Decision Records (Decisiones clave).
+    │   └── 📂 business-rules     # Lógica de negocio y validación de contratos.
+    ├── 📂 resources              # Assets, imágenes y prototipos de UI.
+    └── README.md                 # Guía principal (este archivo).
 
 🛠️ Especificaciones de la API (Contratos)
 
@@ -99,13 +99,11 @@ Este proyecto se gestionó utilizando las mejores prácticas de Git & GitHub:
 
 Este es un proyecto académico desarrollado como parte del curso de Arquitectura de Software.
 📄 Licencia
-
 Este proyecto fue creado con fines educativos.
-
 Autor
-    Ruben Ariel Acosta Aguilar
-    Universidad: USIP
-    Módulo: 3 - Arquitectura de Software
-    Fecha: Febrero 2026
+        Ruben Ariel Acosta Aguilar
+        Universidad: USIP
+        Módulo: 3 - Arquitectura de Software
+        Fecha: Febrero 2026
 
 
