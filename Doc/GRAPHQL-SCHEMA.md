@@ -9,20 +9,13 @@ GraphQL
 Representa el estado actual de un contrato en su ciclo de vida.
 """
 
-    enum ContractStatus {
-    
-      DRAFT
-      
-      IN_REVIEW
-      
-      PENDING_SIGNATURE
-      
-      SIGNED
-      
-      EXPIRED
-      
-      VOID
-      
+    enum ContractStatus {    
+      DRAFT      
+      IN_REVIEW      
+      PENDING_SIGNATURE      
+      SIGNED      
+      EXPIRED      
+      VOID      
     }
 
 
