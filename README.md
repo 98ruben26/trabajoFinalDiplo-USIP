@@ -1,5 +1,10 @@
 # trabajoFinalDiplo-USIP
 Diplomado USIP-TrabajoFinal
+Autor
+    Ruben Ariel Acosta Aguilar
+    Universidad: USIP
+    Módulo: 3 - Arquitectura de Software
+    Fecha: Febrero 2026
 
 📑 System Design & API Management: Contract Manager Pro
 
@@ -100,10 +105,6 @@ Este proyecto se gestionó utilizando las mejores prácticas de Git & GitHub:
 Este es un proyecto académico desarrollado como parte del curso de Arquitectura de Software.
 📄 Licencia
 Este proyecto fue creado con fines educativos.
-Autor
-        Ruben Ariel Acosta Aguilar
-        Universidad: USIP
-        Módulo: 3 - Arquitectura de Software
-        Fecha: Febrero 2026
+
 
 
