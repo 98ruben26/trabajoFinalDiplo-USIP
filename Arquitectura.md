@@ -20,22 +20,22 @@ Para este sistema, los recursos principales se dividen en:
                PATCH	         /v1/contracts/{id}	   Actualiza cláusulas o datos.	                content, status
                DELETE	       /v1/contracts/{id}	   Borrado lógico del contrato.	                reason
 
-Ejemplo de Payload (POST):
-JSON
+Ejemplo de Payload (POST):JSON
 
-{
-  "title": "Acuerdo de Confidencialidad - Cliente X",
-  "template_id": "tmpl-8823",
-  "parties": [
-    { "role": "sender", "email": "legal@empresa.com" },
-    { "role": "signer", "email": "ceo@cliente.com" }
-  ],
-  "expires_at": "2026-12-31T23:59:59Z"
-}
+    {
+      "title": "Acuerdo de Confidencialidad - Cliente X",
+      "template_id": "tmpl-8823",
+      "parties": [
+        { "role": "sender", "email": "legal@empresa.com" },
+        { "role": "signer", "email": "ceo@cliente.com" }
+      ],
+      "expires_at": "2026-12-31T23:59:59Z"
+    }
 
 B. Flujo de Firma (/signatures) 
 
 Este módulo se integra con proveedores externos (DocuSign, Adobe Sign) o un motor interno.
+
         Método	                  Endpoint	                         Descripción
         POST	              /v1/contracts/{id}/send	        Inicia el proceso de firma y envía correos.
         GET	              /v1/contracts/{id}/audit-log	  Historial completo de interacciones (IP, timestamp).
