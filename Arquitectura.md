@@ -1,5 +1,6 @@
 # Arquitectura del sistema 
 
+
 1. Diagrama de Arquitectura de Alto Nivel
 
 El siguiente esquema muestra cómo interactúan los componentes de microservicios, la gestión de APIs y los motores de eventos.
