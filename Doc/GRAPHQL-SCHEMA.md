@@ -8,6 +8,7 @@ GraphQL
 """
 Representa el estado actual de un contrato en su ciclo de vida.
 """
+
   enum ContractStatus {
     DRAFT
     IN_REVIEW
@@ -16,6 +17,7 @@ Representa el estado actual de un contrato en su ciclo de vida.
     EXPIRED
     VOID
   }
+
 
 """
 Entidad principal que contiene la información legal y metadatos.
