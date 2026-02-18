@@ -44,6 +44,7 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
 Desglose de Componentes
 
 Para que Contract Manager Pro sea robusto, la infraestructura se divide en estas áreas clave:
+
             Componente	                        Función Principal
       API Gateway	                     Punto de entrada único. Maneja el versionamiento de la API, seguridad y ruteo.
       Contract Service	               El "corazón". Gestiona el ciclo de vida del contrato (borrador, activo, vencido).
