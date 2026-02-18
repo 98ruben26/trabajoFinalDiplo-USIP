@@ -1,58 +1,64 @@
 # trabajoFinalDiplo-USIP
 Diplomado USIP-TrabajoFinal
 
-Arquitectura de Software - API Design
-📋 Descripción del Proyecto
+📑 System Design & API Management: Contract Manager Pro
 
-Este repositorio contiene la documentación técnica del diseño de APIs REST y GraphQL para arquitectura y especificaciones de API para el nuevo sistema de administración de personal y pacientes de un hospital , desarrollado como proyecto final del Módulo 3 de Arquitectura de Software.
+Este repositorio contiene la documentación técnica, diseño de arquitectura y especificaciones de API para el nuevo sistema de administración de contratos. 
+El objetivo es centralizar la "fuente de verdad" del proyecto, asegurando trazabilidad y estándares de calidad profesional.
 
-🎯 Objetivos
-    Gestionar el ciclo de vida del proyecto utilizando Git & GitHub
-    Documentar endpoints REST de manera profesional
-    Diseñar esquemas GraphQL completos
-    Crear diagramas de arquitectura del sistema
-    Comparar eficiencia entre REST y GraphQL
- 
-📂 Estructura del Repositorio
+🎯 Objetivos de la Documentación
 
-├── README.md                 # Este archivo
-├── REST-API.md              # Documentación de endpoints REST
-├── GRAPHQL-SCHEMA.md        # Esquema y queries de GraphQL
-└── ARCHITECTURE.md          # Diagrama de arquitectura del sistema
+    Estandarización: Definir contratos de API claros bajo el estándar OpenAPI (Swagger).
+    Transparencia: Registrar cada fase del diseño (Diagramas, Entidad-Relación).
+    Trazabilidad: Mantener un histórico de decisiones técnicas (ADR).
 
-🚀 Contenido
-1. API REST
+🗂️ Estructura del Repositorio
+La documentación se organiza de la siguiente manera para facilitar la auditoría del avance:
+Plaintext
 
-Documentación completa de los endpoints REST incluyendo:
+├── 📂 docs
+│   ├── 📂 architecture       # Diagramas C4, Flujos de Secuencia y ERD.
+│   ├── 📂 api-contracts      # Archivos YAML/JSON (OpenAPI Spec).
+│   ├── 📂 adr                # Architectural Decision Records (Decisiones clave).
+│   └── 📂 business-rules     # Lógica de negocio y validación de contratos.
+├── 📂 resources              # Assets, imágenes y prototipos de UI.
+└── README.md                 # Guía principal (este archivo).
 
-    Base URL y autenticación
-    Endpoints de Productos (GET, POST, PUT, DELETE)
-    Endpoints de Carrito de Compras
-    Endpoints de Órdenes
-    Códigos de respuesta HTTP
+🛠️ Especificaciones de la API (Contratos)
+
+El diseño de la comunicación entre servicios se basa en el principio API-First.
+Recurso	Método	Endpoint	Descripción	Estado
+Auth	POST	/api/v1/auth/login	Autenticación de usuarios.	✅ Finalizado
+Contratos	GET	/api/v1/contracts	Listado de contratos activos.	⏳ En desarrollo
+Contratos	POST	/api/v1/contracts	Creación de nuevo contrato.	🛠️ Pendiente
 
 Ver: REST-API.md
-2. GraphQL Schema
 
-Definición del esquema GraphQL con:
-
-    Types y relaciones
-    Queries disponibles
-    Mutations para operaciones de escritura
-    Ejemplos de uso
-    Ventajas sobre REST
-
+📐 Diseño del Sistema
+Para garantizar la escalabilidad, se han definido los siguientes artefactos:
+   
+    Definición del esquema GraphQL con:
+         Modelo de Datos: Diseño relacional optimizado para la integridad de los contratos legales.
+            Types y relaciones
+            Queries disponibles
+            Mutations para operaciones de escritura
+            Ejemplos de uso
+            Ventajas sobre REST
 Ver: GRAPHQL-SCHEMA.md
-3. Arquitectura del Sistema
 
-Diagrama y descripción de:
+    
 
-    Componentes principales (Frontend, Backend, Base de datos)
-    Flujo de datos
-    Servicios externos
-    Escalabilidad y seguridad
+    Diagrama y descripción de:
+        Arquitectura: Basada en capas (Controller, Service, Repository). 
+            Flujo de datos
+            Servicios externos
+            Escalabilidad y seguridad
 
 Ver: ARCHITECTURE.md
+
+    
+    Seguridad: Implementación de JWT para la protección de los endpoints.    
+
 🛠️ Tecnologías Propuestas
 Backend
 
@@ -102,6 +108,4 @@ Autor
     Módulo: 3 - Arquitectura de Software
     Fecha: Febrero 2026
 
-
-    Total Agradecimiento a quien corresponda por el ejemplo proporcionado
 
