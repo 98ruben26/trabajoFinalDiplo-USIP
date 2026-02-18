@@ -51,8 +51,13 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
 
 4. Stack Tecnológico Recomendado
    
-    Componente	Tecnología Sugerida
+       Componente	Tecnología Sugerida
+   
        API Docs	Swagger / OpenAPI 3.0
+   
        Backend	Node.js (NestJS) o Go (por su alta concurrencia)
+   
        Mensajería	Apache Kafka (para trazas de auditoría masivas)
+   
        Infraestructura	Kubernetes (K8s) para orquestación de contenedores
+   
