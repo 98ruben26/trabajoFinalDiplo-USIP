@@ -1,6 +1,6 @@
-#GraphQL API - Esquema y Documentación
+# GraphQL API - Esquema y Documentación
 
-##Diseño del Esquema GraphQL (SDL)
+## Diseño del Esquema GraphQL (SDL)
 
 El esquema se centra en la relación entre contratos, firmantes y plantillas, integrando tipos escalares para manejar fechas y estados.
 GraphQL
