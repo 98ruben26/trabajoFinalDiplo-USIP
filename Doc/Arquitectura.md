@@ -41,6 +41,28 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
        I --> L
        F -.-> K
 
+Desglose de Componentes
+
+Para que Contract Manager Pro sea robusto, la infraestructura se divide en estas áreas clave:
+            Componente	                        Función Principal
+      API Gateway	                     Punto de entrada único. Maneja el versionamiento de la API, seguridad y ruteo.
+      Contract Service	               El "corazón". Gestiona el ciclo de vida del contrato (borrador, activo, vencido).
+      Workflow Engine	               Maneja la lógica de aprobación (quién firma después de quién).
+      Document Vault (S3)	         Almacenamiento seguro para los archivos físicos (.pdf, .docx) con cifrado en reposo.
+      Event Bus	                     (Opcional) Para que, cuando un contrato se firme, se disparen acciones automáticamente en otros sistemas.
+
+El Flujo del Contrato (Diagrama de Secuencia)
+
+Así interactúan los componentes cuando un usuario sube un contrato:
+
+          Request: El cliente envía el contrato al API Gateway.
+
+          Validation: El API Management verifica la suscripción y permisos del usuario.
+
+          Processing: El Contract Service guarda la metadata en SQL y el archivo en S3.
+
+          Notification: Se dispara un evento al Notification Service para avisar a los firmantes.
+
 2. Desglose de Capas del Sistema
    
 A. Capa de API Management (Control Plane)
