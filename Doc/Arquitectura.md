@@ -96,7 +96,59 @@ C. Capa de Persistencia y Cache
 
         S3 / Azure Blob Storage: Almacenamiento de los archivos binarios (PDFs finales) con encriptación AES-256.
 
-3. Flujo de Datos: Creación y Firma
+3. Visualización del Grafo de Datos
+
+Para entender cómo GraphQL resuelve las relaciones, el siguiente diagrama muestra la jerarquía de los tipos definidos:
+Diagrama Entidad-Relación 
+
+Este esquema muestra cómo se conectan los usuarios con los contratos y sus versiones.
+Plaintext
+
+      [ USUARIOS ]          [ ORGANIZACIONES ]
+             | 1                    | 1
+             |                      |
+             +-------+--------------+
+                     |
+                     | n
+              [ CONTRATOS ] <----------- [ PLANTILLAS ]
+                     | 1          (Templates para nuevos docs)
+                     |
+            +--------+---------+----------------+
+            | n                | n              | n
+       [ VERSIONES ]     [ FIRMANTES ]     [ AUDITORÍA ]
+       (Archivos S3)     (Estado firma)    (Logs de cambios)
+
+Estructura de Tablas (DDL Conceptual)
+
+Tabla: contracts (El núcleo)
+
+Contiene la metadata principal del documento.
+
+      id: UUID (Primary Key)
+      title: VARCHAR(255)
+      status: ENUM ('draft', 'pending_approval', 'signed', 'expired')
+      org_id: UUID (Foreign Key -> organizations)
+      created_at: TIMESTAMP
+      
+Tabla: contract_versions (Control de cambios)
+
+Crucial para el "Contract Management" para no perder versiones anteriores.
+
+      id: UUID
+      contract_id: UUID (FK)
+      version_number: INT
+      s3_url: TEXT (Ruta al archivo físico)
+      hash_sha256: VARCHAR(64) (Para verificar que el archivo no fue alterado)
+
+Tabla: signatories (Flujo de firmas)
+
+      id: UUID
+      contract_id: UUID (FK)
+      user_id: UUID (FK)
+      signature_order: INT (Para firmas secuenciales)
+      signed_at: TIMESTAMP (NULL si no ha firmado)
+
+4. Flujo de Datos: Creación y Firma
 
     Para entender cómo viaja la información, podemos observar el diagrama de secuencia del proceso:
     Flujo de Trabajo (Workflow):
@@ -111,7 +163,7 @@ C. Capa de Persistencia y Cache
 
         Callback: El proveedor de firma envía un Webhook al sistema cuando el usuario firma, activando la actualización del estado a SIGNED.
 
-4. Stack Tecnológico Recomendado
+5. Stack Tecnológico Recomendado
    
        Componente	Tecnología Sugerida
    
