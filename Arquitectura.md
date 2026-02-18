@@ -1,82 +1,58 @@
 # Arquitectura del sistema 
 
-Para este sistema, los recursos principales se dividen en:
+1. Diagrama de Arquitectura de Alto Nivel
 
-    /contracts: Gestión del documento y metadatos.
+El siguiente esquema muestra cómo interactúan los componentes de microservicios, la gestión de APIs y los motores de eventos.
+2. Desglose de Capas del Sistema
+    A. Capa de API Management (Control Plane)
 
-    /templates: Plantillas preconfiguradas.
+    Esta es la "aduana" del sistema. Utiliza herramientas como Kong, Apigee o AWS API Gateway.
 
-    /signatures: Estado y flujos de firma digital.
+        Rate Limiting: Controla que un cliente no sature el servicio (ej. 100 req/min).
 
-    /webhooks: Notificaciones en tiempo real para sistemas externos.
+        Authentication (OAuth2/JWT): Valida la identidad del usuario antes de tocar los servicios.
 
-2. Especificación de Endpoints (Contratos)
-3. 
-          A. Gestión de Contratos (/contracts)
+        Transformation: Convierte protocolos (ej. de XML de sistemas legacy a JSON moderno).
+
+    B. Capa de Microservicios (Business Logic)
+
+    Los servicios están desacoplados para escalar de forma independiente:
+
+        Contract Service: El núcleo. Maneja el CRUD y el versionado de documentos.
+
+        Template Engine: Genera PDFs dinámicos usando Handlebars o React-PDF a partir de JSON.
+
+        Signature Provider Adapter: Un "Wrapper" que comunica con proveedores externos (DocuSign/SignEasy) mediante un patrón Strategy.
+
+        Audit Service: Registra cada cambio en un libro de contabilidad (Ledger) inmutable para fines legales.
+
+    C. Capa de Persistencia y Cache
+
+        PostgreSQL: Para datos relacionales (Metadatos del contrato, usuarios, permisos).
+
+        Redis: Cache de sesiones y control de idempotencia para evitar duplicados en las firmas.
+
+        S3 / Azure Blob Storage: Almacenamiento de los archivos binarios (PDFs finales) con encriptación AES-256.
+
+    3. Flujo de Datos: Creación y Firma
+
+    Para entender cómo viaja la información, podemos observar el diagrama de secuencia del proceso:
+    Flujo de Trabajo (Workflow):
+
+        Request: El cliente envía un POST /contracts.
+
+        Validation: El Gateway valida el token y el servicio de contratos verifica la integridad de la plantilla.
+
+        Storage: Se guarda el borrador en la DB y el archivo temporal en el Storage.
+
+        Event: Se dispara un evento a la cola de mensajería (RabbitMQ/Kafka) para notificar al firmante.
+
+        Callback: El proveedor de firma envía un Webhook al sistema cuando el usuario firma, activando la actualización del estado a SIGNED.
+
+4. Stack Tecnológico Recomendado
    
-            Método	               Endpoint	                 Descripción	                      Parámetros Clave
-               POST	         /v1/contracts	       Crea un nuevo borrador de contrato.	        template_id, parties,    metadata
-               GET	           /v1/contracts/{id}	   Recupera el estado y contenido.	            id (UUID)
-               PATCH	         /v1/contracts/{id}	   Actualiza cláusulas o datos.	                content, status
-               DELETE	       /v1/contracts/{id}	   Borrado lógico del contrato.	                reason
-
-Ejemplo de Payload (POST):JSON
-
-    {
-      "title": "Acuerdo de Confidencialidad - Cliente X",
-      "template_id": "tmpl-8823",
-      "parties": [
-        { "role": "sender", "email": "legal@empresa.com" },
-        { "role": "signer", "email": "ceo@cliente.com" }
-      ],
-      "expires_at": "2026-12-31T23:59:59Z"
-    }
-
-B. Flujo de Firma (/signatures) 
-
-Este módulo se integra con proveedores externos (DocuSign, Adobe Sign) o un motor interno.
-
-        Método	                  Endpoint	                         Descripción
-        POST	              /v1/contracts/{id}/send	        Inicia el proceso de firma y envía correos.
-        GET	              /v1/contracts/{id}/audit-log	  Historial completo de interacciones (IP, timestamp).
-        
-3. Modelo de Datos y Estados
-
-El contrato debe seguir una máquina de estados estricta para garantizar la integridad legal.
-Estados Soportados:
-
-    DRAFT: Edición interna.
-    IN_REVIEW: Pendiente de aprobación legal.
-    PENDING_SIGNATURE: Enviado a las partes.
-    SIGNED: Contrato vinculado legalmente.
-    EXPIRED/VOID: Sin validez.
-
-4. Gestión de Errores y Seguridad
-       Encabezados Requeridos (Headers):
-            Authorization: Bearer <JWT_TOKEN>
-            X-API-Key: <CLIENT_ID>
-            Content-Type: application/json
-   
-       Respuestas de Error Estándar:
-            Código	            Significado	                Motivo Típico
-            400	            Bad Request	El JSON         enviado es inválido o faltan campos obligatorios.
-            401	            Unauthorized	            Token expirado o inválido.
-            403	            Forbidden	                El usuario no tiene permisos sobre este contrato específico.
-            422	            Unprocessable Entity	    Error de lógica de negocio .
-
-6. Webhooks y Eventos Asíncronos
-
-Dado que la firma de un contrato es un proceso humano lento, el sistema debe ser Event-Driven.
-
-Evento: contract.signed
-JSON
-
-    {
-      "event_type": "contract.signed",
-      "timestamp": "2026-02-17T14:00:00Z",
-      "data": {
-        "contract_id": "uuid-12345",
-        "signed_by": "ceo@cliente.com",
-        "document_url": "https://storage.provider.com/signed/contract_01.pdf"
-      }
-    }
+    Componente	Tecnología Sugerida
+       API Docs	Swagger / OpenAPI 3.0
+       Backend	Node.js (NestJS) o Go (por su alta concurrencia)
+       Mensajería	Apache Kafka (para trazas de auditoría masivas)
+       Infraestructura	Kubernetes (K8s) para orquestación de contenedores
