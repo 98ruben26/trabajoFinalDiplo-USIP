@@ -22,6 +22,8 @@ Representa el estado actual de un contrato en su ciclo de vida.
 """
 Entidad principal que contiene la información legal y metadatos.
 """
+
+
   type Contract {
     id: ID!
     title: String!
@@ -58,14 +60,18 @@ Entidad principal que contiene la información legal y metadatos.
     userId: ID
   }
 
+
 # Queries: Lectura de datos
+
   type Query {
     getContract(id: ID!): Contract
     listContracts(status: ContractStatus, limit: Int): [Contract!]!
     me: Party!
   }
 
+
 # Mutations: Modificación de datos
+
   type Mutation {
     createContract(input: CreateContractInput!): Contract!
     updateContractStatus(id: ID!, status: ContractStatus!): Contract!
@@ -85,12 +91,13 @@ Entidad principal que contiene la información legal y metadatos.
     role: String!
   }
 
-2. Documentación de Operaciones
+## 2. Documentación de Operaciones
    
 Query de Ejemplo: Dashboard de Contratos
 
 Un cliente puede solicitar una lista de contratos pendientes de firma, obteniendo solo los nombres de los firmantes y la fecha de creación.
 GraphQL
+
 
   query GetPendingContracts {
     listContracts(status: PENDING_SIGNATURE, limit: 10) {
@@ -103,11 +110,13 @@ GraphQL
       }
     }
   }
+  
 
 Mutation de Ejemplo: Creación de Contrato
 
 Permite instanciar un contrato a partir de una plantilla predefinida.
 GraphQL
+
 
   mutation NewContract {
     createContract(input: {
@@ -122,10 +131,12 @@ GraphQL
       status
     }
   }
+  
 
-4. Estrategia de API Management para GraphQL
+## 3. Estrategia de API Management para GraphQL
 
 Implementar GraphQL en Contract Manager Pro requiere controles específicos que no existen en REST:
+
 
   Análisis de Complejidad (Query Cost): Dado que un contrato puede tener cientos de cláusulas y logs de auditoría, se asigna un "costo" a 
   cada campo. Si una consulta supera el costo permitido (ej. 500 puntos), el API Gateway la rechaza.
@@ -136,7 +147,8 @@ Implementar GraphQL en Contract Manager Pro requiere controles específicos que 
   Authorization at Field Level: Se implementan directivas (ej. @auth) para asegurar que solo los usuarios 
   con rol ADMIN puedan ver el campo ipAddress dentro de AuditLog.
 
-5. Comparativa: REST vs GraphQL en este Sistema
+## 4. Comparativa: REST vs GraphQL en este Sistema
+
 
       Característica	                        REST API (v1)	                            GraphQL API (v1)
       Flexibilidad	                      Estricta (Endpoints fijos)	            Alta (El cliente define la forma)
