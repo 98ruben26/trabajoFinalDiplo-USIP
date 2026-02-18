@@ -3,8 +3,10 @@
 1. Diagrama de Arquitectura de Alto Nivel
 
 El siguiente esquema muestra cómo interactúan los componentes de microservicios, la gestión de APIs y los motores de eventos.
+
 2. Desglose de Capas del Sistema
-    A. Capa de API Management (Control Plane)
+   
+A. Capa de API Management (Control Plane)
 
     Esta es la "aduana" del sistema. Utiliza herramientas como Kong, Apigee o AWS API Gateway.
 
@@ -14,7 +16,7 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
 
         Transformation: Convierte protocolos (ej. de XML de sistemas legacy a JSON moderno).
 
-    B. Capa de Microservicios (Business Logic)
+B. Capa de Microservicios (Business Logic)
 
     Los servicios están desacoplados para escalar de forma independiente:
 
@@ -26,7 +28,7 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
 
         Audit Service: Registra cada cambio en un libro de contabilidad (Ledger) inmutable para fines legales.
 
-    C. Capa de Persistencia y Cache
+C. Capa de Persistencia y Cache
 
         PostgreSQL: Para datos relacionales (Metadatos del contrato, usuarios, permisos).
 
@@ -34,7 +36,7 @@ El siguiente esquema muestra cómo interactúan los componentes de microservicio
 
         S3 / Azure Blob Storage: Almacenamiento de los archivos binarios (PDFs finales) con encriptación AES-256.
 
-    3. Flujo de Datos: Creación y Firma
+3. Flujo de Datos: Creación y Firma
 
     Para entender cómo viaja la información, podemos observar el diagrama de secuencia del proceso:
     Flujo de Trabajo (Workflow):
