@@ -11,12 +11,14 @@ Para este sistema, los recursos principales se dividen en:
     /webhooks: Notificaciones en tiempo real para sistemas externos.
 
 2. Especificación de Endpoints (Contratos)
+3. 
           A. Gestión de Contratos (/contracts)
+   
             Método	               Endpoint	                 Descripción	                      Parámetros Clave
-              POST	         /v1/contracts	       Crea un nuevo borrador de contrato.	        template_id, parties,    metadata
-              GET	           /v1/contracts/{id}	   Recupera el estado y contenido.	            id (UUID)
-              PATCH	         /v1/contracts/{id}	   Actualiza cláusulas o datos.	                content, status
-              DELETE	       /v1/contracts/{id}	   Borrado lógico del contrato.	                reason
+               POST	         /v1/contracts	       Crea un nuevo borrador de contrato.	        template_id, parties,    metadata
+               GET	           /v1/contracts/{id}	   Recupera el estado y contenido.	            id (UUID)
+               PATCH	         /v1/contracts/{id}	   Actualiza cláusulas o datos.	                content, status
+               DELETE	       /v1/contracts/{id}	   Borrado lógico del contrato.	                reason
 
 Ejemplo de Payload (POST):
 JSON
@@ -34,9 +36,10 @@ JSON
 B. Flujo de Firma (/signatures) 
 
 Este módulo se integra con proveedores externos (DocuSign, Adobe Sign) o un motor interno.
-                           Método	                  Endpoint	                         Descripción
-                           POST	              /v1/contracts/{id}/send	        Inicia el proceso de firma y envía correos.
-                           GET	              /v1/contracts/{id}/audit-log	  Historial completo de interacciones (IP, timestamp).
+        Método	                  Endpoint	                         Descripción
+        POST	              /v1/contracts/{id}/send	        Inicia el proceso de firma y envía correos.
+        GET	              /v1/contracts/{id}/audit-log	  Historial completo de interacciones (IP, timestamp).
+        
 3. Modelo de Datos y Estados
 
 El contrato debe seguir una máquina de estados estricta para garantizar la integridad legal.
