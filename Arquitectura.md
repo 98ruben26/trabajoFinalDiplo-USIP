@@ -52,17 +52,18 @@ Estados Soportados:
     EXPIRED/VOID: Sin validez.
 
 4. Gestión de Errores y Seguridad
-Encabezados Requeridos (Headers):
-    Authorization: Bearer <JWT_TOKEN>
-    X-API-Key: <CLIENT_ID>
-    Content-Type: application/json
-
+   
+    Encabezados Requeridos (Headers):
+        Authorization: Bearer <JWT_TOKEN>
+        X-API-Key: <CLIENT_ID>
+        Content-Type: application/json
+   
 Respuestas de Error Estándar:
-Código	Significado	Motivo Típico
-400	Bad Request	El JSON enviado es inválido o faltan campos obligatorios.
-401	Unauthorized	Token expirado o inválido.
-403	Forbidden	El usuario no tiene permisos sobre este contrato específico.
-422	Unprocessable Entity	Error de lógica de negocio (ej. intentar editar un contrato ya firmado).
+    Código	Significado	Motivo Típico
+        400	Bad Request	El JSON enviado es inválido o faltan campos obligatorios.
+        401	Unauthorized	Token expirado o inválido.
+        403	Forbidden	El usuario no tiene permisos sobre este contrato específico.
+        422	Unprocessable Entity	Error de lógica de negocio (ej. intentar editar un contrato ya firmado).
 
 5. Webhooks y Eventos Asíncronos
 
@@ -71,12 +72,12 @@ Dado que la firma de un contrato es un proceso humano lento, el sistema debe ser
 Evento: contract.signed
 JSON
 
-{
-  "event_type": "contract.signed",
-  "timestamp": "2026-02-17T14:00:00Z",
-  "data": {
-    "contract_id": "uuid-12345",
-    "signed_by": "ceo@cliente.com",
-    "document_url": "https://storage.provider.com/signed/contract_01.pdf"
-  }
-}
+    {
+      "event_type": "contract.signed",
+      "timestamp": "2026-02-17T14:00:00Z",
+      "data": {
+        "contract_id": "uuid-12345",
+        "signed_by": "ceo@cliente.com",
+        "document_url": "https://storage.provider.com/signed/contract_01.pdf"
+      }
+    }
