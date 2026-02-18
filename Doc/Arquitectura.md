@@ -5,6 +5,42 @@
 
 El siguiente esquema muestra cómo interactúan los componentes de microservicios, la gestión de APIs y los motores de eventos.
 
+   graph TD
+       subgraph Client_Layer [Capa de Cliente]
+           A[Web App - React/Next.js]
+           B[Mobile App]
+       end
+
+       subgraph API_Management [API Management Layer]
+           C[API Gateway / Kong or Apigee]
+           D[Auth Service - OAuth2/JWT]
+           E[Rate Limiting & Logging]
+       end
+
+       subgraph Business_Logic [Microservicios Core]
+           F[Contract Service]
+           G[Workflow/Approval Engine]
+           H[Notification Service]
+           I[Document Generator - PDF]
+       end
+
+       subgraph Data_Storage [Capa de Datos]
+           J[(PostgreSQL - Metadata)]
+           K[(Redis - Cache)]
+           L[S3 - Almacenamiento de Contratos]
+       end
+
+       %% Conexiones
+       A & B --> C
+       C --> D
+       C --> E
+       E --> F & G
+       F --> J
+       G --> H
+       F --> I
+       I --> L
+       F -.-> K
+
 2. Desglose de Capas del Sistema
    
 A. Capa de API Management (Control Plane)
