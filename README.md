@@ -1,10 +1,9 @@
 # trabajoFinalDiplo-USIP
-Diplomado USIP-TrabajoFinal
-Autor
-    Ruben Ariel Acosta Aguilar
-    Universidad: USIP
-    Módulo: 3 - Arquitectura de Software
-    Fecha: Febrero 2026
+    Diplomado USIP-TrabajoFinal
+        Autor Ruben Ariel Acosta Aguilar
+        Universidad: USIP
+        Módulo: 3 - Arquitectura de Software
+        Fecha: Febrero 2026
 
 📑 System Design & API Management: Contract Manager Pro
 
